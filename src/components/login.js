@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+import "./login.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +16,6 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
-        // You can perform further actions like redirecting to a dashboard page
       } else {
         console.log("Login failed");
       }
@@ -26,20 +26,36 @@ const Login = () => {
 
   return (
     <div className="App">
-      <h1>Login</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+      <div className="login">
+        <div className="header">
+          <h1>Login</h1>
+        </div>
+        <div className="items">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            className="item"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            className="item"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button className="login-btn" onClick={handleLogin}>
+          Login
+        </button>
+        <p className="exists">
+          Dont have an account?
+          <Link className="existslink" to="/signup">
+            Signup
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

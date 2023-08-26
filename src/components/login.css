@@ -4,7 +4,7 @@
   align-items: center;
   padding: 100px 150px;
 }
-.signup {
+.login {
   display: flex;
 
   flex-direction: column;
@@ -41,7 +41,7 @@
   line-height: 18px; /* 112.5% */
   padding: 10px;
 }
-.signup-btn {
+.login-btn {
   border-radius: 16px;
   background: var(--violet-violet-100, #7f3dff);
   display: flex;

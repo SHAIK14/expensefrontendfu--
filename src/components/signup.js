@@ -3,6 +3,7 @@ import "./signup.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../constants";
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -60,8 +61,11 @@ const Signup = () => {
         <button className="signup-btn" onClick={handleSignup}>
           Signup
         </button>
-        <p>
-          Already have an account? <Link to="/login">Login</Link>
+        <p className="exists">
+          Already have an account?
+          <Link className="existslink" to="/login">
+            Login
+          </Link>
         </p>
       </div>
     </div>
