@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./login.css";
+import { BACKEND_URL } from "../constants";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:4000/login", {
+      const response = await axios.post(`${BACKEND_URL}/users/login`, {
         email,
         password,
       });

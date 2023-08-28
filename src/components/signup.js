@@ -23,9 +23,11 @@ const Signup = () => {
         navigate("/login");
       } else {
         console.log("Signup failed");
+        alert("Signup failed. Please check your input and try again.");
       }
     } catch (error) {
       console.error("Error signing up:", error);
+      alert("An error occurred while signing up. Please try again later.");
     }
   };
 
