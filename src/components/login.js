@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import { BACKEND_URL } from "../constants";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleLogin = async () => {
     try {
       const response = await axios.post(`${BACKEND_URL}/users/login`, {
@@ -17,6 +18,7 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
+        navigate("/addExpenses");
       } else {
         console.log("Login failed");
       }
