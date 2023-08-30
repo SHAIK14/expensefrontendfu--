@@ -18,6 +18,7 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
+        localStorage.setItem("token", response.data.token);
         navigate("/addExpenses");
       } else {
         console.log("Login failed");
@@ -54,7 +55,7 @@ const Login = () => {
         </button>
         <p className="exists">
           Dont have an account?
-          <Link className="existslink" to="/signup">
+          <Link className="existslink" to="/">
             Signup
           </Link>
         </p>
