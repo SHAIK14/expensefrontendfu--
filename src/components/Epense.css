@@ -1,0 +1,99 @@
+.expense-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+}
+
+.formexpense {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+}
+.labels {
+  font-family: Inter;
+}
+.Amount,
+.description,
+.items {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.items {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-addexpense {
+  background-color: #7f3dff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.expense-list {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+h2 {
+  font-family: Roboto, sans-serif;
+}
+.expensedata {
+  margin: 10px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.expensedata ul {
+  list-style: none;
+  padding: 0;
+}
+
+.expensedata li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-family: Roboto, sans-serif;
+}
+
+.delete-btn {
+  background-color: #ff6363;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #e04e4e;
+}

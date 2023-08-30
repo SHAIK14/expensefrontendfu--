@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import "./Epense.css";
 const ExpenseForm = () => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -66,49 +66,84 @@ const ExpenseForm = () => {
 
   return (
     <div className="expense-form">
-      <h2>Add Expense</h2>
-      <label>
-        Amount:
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-      </label>
-      <label>
-        Description:
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </label>
-      <label>
-        Category:
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Select Category</option>
-          <option value="Groceries">Groceries</option>
-          <option value="Transportation">Transportation</option>
-          <option value="Utilities">Utilities</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Dining">Dining</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Food">Food</option>
-        </select>
-      </label>
-      <button onClick={handleAddExpense}>Add Expense</button>
-
-      <h2>Expenses</h2>
-      <ul>
+      <div className="formexpense">
+        <h2 className="header">Add Expense</h2>
+        <label className="labels">
+          Amount:
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="Amount"
+          />
+        </label>
+        <label className="labels">
+          Description:
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="description"
+          />
+        </label>
+        <label className="labels">
+          Category:
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="items"
+          >
+            <option value="" className="item">
+              Select Category
+            </option>
+            <option value="Groceries" className="item">
+              Groceries
+            </option>
+            <option value="Transportation" className="item">
+              Transportation
+            </option>
+            <option value="Utilities" className="item">
+              Utilities
+            </option>
+            <option value="Entertainment" className="item">
+              Entertainment
+            </option>
+            <option value="Dining" className="item">
+              Dining
+            </option>
+            <option value="Shopping" className="item">
+              Shopping
+            </option>
+            <option value="Food" className="item">
+              Food
+            </option>
+          </select>
+        </label>
+        <button className="btn-addexpense" onClick={handleAddExpense}>
+          Add Expense
+        </button>
+      </div>
+      <div>
+        <h2 className="expense list">Expenses</h2>
+      </div>
+      <div className="expensedatas">
         {expenses.map((expense) => (
-          <li key={expense.id}>
-            {expense.description} - {expense.expenseamount} - {expense.category}
-            <button onClick={() => handleDeleteExpense(expense.id)}>
-              Delete
-            </button>
-          </li>
+          <div className="expensedata" key={expense.id}>
+            <ul>
+              <li>
+                {expense.description} - {expense.expenseamount} -{" "}
+                {expense.category}
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDeleteExpense(expense.id)}
+                >
+                  Delete
+                </button>
+              </li>
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
