@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./Epense.css";
 const ExpenseForm = () => {
@@ -6,6 +6,8 @@ const ExpenseForm = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [expenses, setExpenses] = useState([]);
+  const token = localStorage.getItem("token");
+  console.log(token);
 
   const handleAddExpense = async () => {
     try {
@@ -15,7 +17,8 @@ const ExpenseForm = () => {
           expenseamount: amount,
           description,
           category,
-        }
+        },
+        { headers: { Authorization: token } }
       );
 
       if (response.status === 201) {
@@ -33,7 +36,8 @@ const ExpenseForm = () => {
   const handleDeleteExpense = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/expense/delete/${id}`
+        `http://localhost:4000/api/expense/delete/${id}`,
+        { headers: { Authorization: token } }
       );
 
       if (response.status === 200) {
@@ -46,10 +50,11 @@ const ExpenseForm = () => {
     }
   };
 
-  const fetchExpenses = async () => {
+  const fetchExpenses = useCallback(async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/expense/getexpenses"
+        "http://localhost:4000/api/expense/getexpenses",
+        { headers: { Authorization: token } }
       );
 
       if (response.status === 200) {
@@ -58,12 +63,11 @@ const ExpenseForm = () => {
     } catch (error) {
       console.error("Error fetching expenses:", error);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchExpenses();
-  }, []);
-
+  }, [token, fetchExpenses]);
   return (
     <div className="expense-form">
       <div className="formexpense">

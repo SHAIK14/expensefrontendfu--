@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./signup.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../constants";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -12,11 +11,14 @@ const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post(`${BACKEND_URL}/users/signup`, {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/users/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       if (response.status === 201) {
         console.log("Signup successful");
