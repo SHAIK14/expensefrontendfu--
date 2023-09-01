@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./Epense.css";
+import PremiumPurchase from "./PremiumPurchase";
+
 const ExpenseForm = () => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -126,6 +128,7 @@ const ExpenseForm = () => {
         <button className="btn-addexpense" onClick={handleAddExpense}>
           Add Expense
         </button>
+        <PremiumPurchase />
       </div>
       <div>
         <h2 className="expense list">Expenses</h2>
