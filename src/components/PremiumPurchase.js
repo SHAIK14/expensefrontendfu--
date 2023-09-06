@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 const PremiumPurchase = () => {
-  const [isPremium, setIsPremium] = useState(false);
+  const [isPremium, setIsPremium] = useState(
+    localStorage.getItem("isPremium") === "true"
+  );
   const token = localStorage.getItem("token");
+  useEffect(() => {
+    // When the component mounts, check the premium status from local storage
+    setIsPremium(localStorage.getItem("isPremium") === "true");
+  }, []);
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -61,6 +67,7 @@ const PremiumPurchase = () => {
             { headers: { Authorization: token } }
           )
           .then(() => {
+            localStorage.setItem("isPremium", true);
             setIsPremium(true);
             alert("you are a premium user");
           })
