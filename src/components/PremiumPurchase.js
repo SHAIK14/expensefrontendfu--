@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 const PremiumPurchase = () => {
-  const [isPremium, setIsPremium] = useState(
-    localStorage.getItem("isPremium") === "true"
-  );
+  const [isPremium, setIsPremium] = useState(false);
   const token = localStorage.getItem("token");
-  useEffect(() => {
-    // When the component mounts, check the premium status from local storage
-    setIsPremium(localStorage.getItem("isPremium") === "true");
-  }, []);
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -46,7 +40,7 @@ const PremiumPurchase = () => {
     console.log(amount, order_id, currency);
 
     const options = {
-      key: "rzp_test_obigLiSPDcXxSM", // Enter the Key ID generated from the Dashboard
+      key: "rzp_test_3iiTrQs6HNxDQF", // Enter the Key ID generated from the Dashboard
 
       currency: currency,
       name: "Expense.",
@@ -67,7 +61,6 @@ const PremiumPurchase = () => {
             { headers: { Authorization: token } }
           )
           .then(() => {
-            localStorage.setItem("isPremium", true);
             setIsPremium(true);
             alert("you are a premium user");
           })
