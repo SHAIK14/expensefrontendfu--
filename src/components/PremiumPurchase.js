@@ -31,16 +31,16 @@ const PremiumPurchase = () => {
       { headers: { Authorization: token } }
     );
 
-    if (!result) {
-      alert("Server error. Are you online?");
+    if (!result || !result.data.order_id) {
+      alert("Server error or missing order ID. Are you online?");
       return;
     }
 
-    const { amount, id: order_id, currency } = result.data;
+    const { amount, order_id, currency } = result.data;
     console.log(amount, order_id, currency);
 
     const options = {
-      key: "rzp_test_dAe2pjaqtsuO1x", // Enter the Key ID generated from the Dashboard
+      key: "rzp_test_obigLiSPDcXxSM", // Enter the Key ID generated from the Dashboard
 
       currency: currency,
       name: "Expense.",
