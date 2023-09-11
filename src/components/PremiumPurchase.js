@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import { Jwt } from "jsonwebtoken";
 const PremiumPurchase = () => {
   // const [isPremium, setIsPremium] = useState(false);
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [isPremium, setIsPremium] = useState(false);
+  useEffect(() => {
+    // Update the token from local storage and check if the user is premium
+    const decodedToken = parseJwt(token);
+    setIsPremium(decodedToken && decodedToken.isPremium);
+  }, [token]);
+
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -78,12 +86,34 @@ const PremiumPurchase = () => {
             },
             { headers: { Authorization: token } }
           )
-          .then(() => {
-            alert("you are a premium user");
+          .then((response) => {
+            const newToken = response.data.token; // Assuming your API returns the new token
+            localStorage.setItem("token", newToken); // Set the new token in localStorage
+
+            // Update the state with the new token
+            setToken(newToken);
+
+            alert("You are a premium user");
           })
           .catch(() => {
             alert("Something went wrong. Try Again!!!");
           });
+
+        // axios
+        //   .post(
+        //     "http://localhost:4000/api/purchase/updatetransactionstatus",
+        //     {
+        //       payment_id: response.razorpay_payment_id,
+        //       order_id: response.razorpay_order_id,
+        //     },
+        //     { headers: { Authorization: token } }
+        //   )
+        //   .then(() => {
+        //     alert("you are a premium user");
+        //   })
+        //   .catch(() => {
+        //     alert("Something went wrong. Try Again!!!");
+        //   });
       },
       prefill: {
         name: "Expense",
@@ -103,7 +133,7 @@ const PremiumPurchase = () => {
   }
   return (
     <div>
-      {decodedToken && decodedToken.isPremium ? (
+      {isPremium ? (
         <h1>You are a premium user</h1>
       ) : (
         <button onClick={displayRazorpay}>Buy Premium</button>
