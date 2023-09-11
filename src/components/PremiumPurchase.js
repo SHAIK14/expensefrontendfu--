@@ -103,7 +103,11 @@ const PremiumPurchase = () => {
   }
   return (
     <div>
-      <button onClick={displayRazorpay}>Buy Premium</button>
+      {decodedToken && decodedToken.isPremium ? (
+        <h1>You are a premium user</h1>
+      ) : (
+        <button onClick={displayRazorpay}>Buy Premium</button>
+      )}
     </div>
   );
 };
