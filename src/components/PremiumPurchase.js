@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
+// import { Jwt } from "jsonwebtoken";
 const PremiumPurchase = () => {
-  const [isPremium, setIsPremium] = useState(false);
+  // const [isPremium, setIsPremium] = useState(false);
   const token = localStorage.getItem("token");
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  }
+  const decodedToken = parseJwt(token);
+  console.log(decodedToken);
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -61,7 +79,6 @@ const PremiumPurchase = () => {
             { headers: { Authorization: token } }
           )
           .then(() => {
-            setIsPremium(true);
             alert("you are a premium user");
           })
           .catch(() => {
@@ -86,11 +103,7 @@ const PremiumPurchase = () => {
   }
   return (
     <div>
-      {isPremium ? (
-        <p>You are a premium user!</p>
-      ) : (
-        <button onClick={displayRazorpay}>Buy Premium</button>
-      )}
+      <button onClick={displayRazorpay}>Buy Premium</button>
     </div>
   );
 };
