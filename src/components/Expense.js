@@ -128,7 +128,9 @@ const ExpenseForm = () => {
         <button className="btn-addexpense" onClick={handleAddExpense}>
           Add Expense
         </button>
-        <PremiumPurchase />
+        <div className="purchase">
+          <PremiumPurchase />
+        </div>
       </div>
       <div>
         <h2 className="expense list">Expenses</h2>

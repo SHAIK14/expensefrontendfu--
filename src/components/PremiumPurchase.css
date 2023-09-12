@@ -1,0 +1,95 @@
+/* PremiumPurchase.css */
+
+/* Center the content */
+.premium-purchase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Adjust the height as needed */
+}
+
+/* Style the heading */
+.user {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  font-family: Roboto, sans-serif;
+
+  margin-bottom: 20px;
+}
+
+/* Style the Buy Premium button */
+.buypremium {
+  background-color: #7f3dff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Center the button horizontally within its container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buypremium:hover {
+  background-color: #6a2acc; /* Change the color on hover */
+}
+.show-leaderboard {
+  background-color: #7f3dff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Center the button horizontally within its container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.show-leaderboard:hover {
+  background-color: #6a2acc; /* Change the color on hover */
+}
+/* PremiumPurchase.css */
+/* PremiumPurchase.css */
+.leaderboard {
+  font-family: Inter, sans-serif; /* Apply the Inter font family to the leaderboard container */
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  margin-top: 10px;
+}
+
+.leaderboard h2 {
+  margin-bottom: 10px;
+}
+
+.leaderboard-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.leaderboard-item {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-family: Inter, sans-serif; /* Apply the Inter font family to leaderboard items */
+}
+
+.leaderboard-name {
+  font-weight: bold;
+  font-family: Inter, sans-serif; /* Apply the Inter font family to leaderboard names */
+}
+
+.leaderboard-cost {
+  margin-left: 5px;
+  color: #007bff;
+  font-family: Inter, sans-serif; /* Apply the Inter font family to leaderboard costs */
+}

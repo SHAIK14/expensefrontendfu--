@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./PremiumPurchase.css";
 // import { Jwt } from "jsonwebtoken";
 const PremiumPurchase = () => {
   // const [isPremium, setIsPremium] = useState(false);
   // const token = localStorage.getItem("token");
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isPremium, setIsPremium] = useState(false);
+  const [leaderboardData, setLeaderboardData] = useState([]);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
   useEffect(() => {
     // Update the token from local storage and check if the user is premium
     const decodedToken = parseJwt(token);
@@ -29,7 +32,22 @@ const PremiumPurchase = () => {
   }
   const decodedToken = parseJwt(token);
   console.log(decodedToken);
-
+  const fetchLeaderboardData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/premium/showLeaderBoard",
+        {
+          headers: { Authorization: token },
+        }
+      );
+      setLeaderboardData(response.data);
+      // Toggle the leaderboard visibility
+      setShowLeaderboard(!showLeaderboard);
+    } catch (error) {
+      console.error("Error fetching leaderboard data:", error);
+      // Handle the error, e.g., show an error message to the user
+    }
+  };
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -134,11 +152,58 @@ const PremiumPurchase = () => {
   return (
     <div>
       {isPremium ? (
-        <h1>You are a premium user</h1>
+        <div>
+          <h1 className="user">Premium user</h1>
+          <button onClick={fetchLeaderboardData} className="show-leaderboard">
+            {showLeaderboard ? "Hide Leaderboard" : "Show Leaderboard"}
+          </button>
+          {showLeaderboard && (
+            <div className="leaderboard">
+              <h2>Leaderboard</h2>
+              <ul className="leaderboard-list">
+                {leaderboardData.map((user, index) => (
+                  <li key={index} className="leaderboard-item">
+                    <span className="leaderboard-name">{user.name}:</span>{" "}
+                    <span className="leaderboard-cost">{user.total_cost}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       ) : (
-        <button onClick={displayRazorpay}>Buy Premium</button>
+        <button onClick={displayRazorpay} className="buypremium">
+          Buy Premium
+        </button>
       )}
     </div>
+
+    // <div>
+    //   {isPremium ? (
+    //     <div>
+    //       <h1 className="user">Premium user</h1>
+    //       <button onClick={fetchLeaderboardData} className="show-leaderboard">
+    //         {showLeaderboard ? "Hide Leaderboard" : "Show Leaderboard"}
+    //       </button>
+    //       {showLeaderboard && (
+    //         <div className="leaderboard">
+    //           <h2>Leaderboard</h2>
+    //           <ul>
+    //             {leaderboardData.map((user, index) => (
+    //               <li key={index}>
+    //                 {user.name}: {user.total_cost}
+    //               </li>
+    //             ))}
+    //           </ul>
+    //         </div>
+    //       )}
+    //     </div>
+    //   ) : (
+    //     <button onClick={displayRazorpay} className="buypremium">
+    //       Buy Premium
+    //     </button>
+    //   )}
+    // </div>
   );
 };
 export default PremiumPurchase;

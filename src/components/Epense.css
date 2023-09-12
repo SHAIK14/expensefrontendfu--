@@ -97,3 +97,7 @@ h2 {
 .delete-btn:hover {
   background-color: #e04e4e;
 }
+.purchase {
+  display: flex;
+  justify-content: center;
+}
