@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+// import PasswordReset from "./PasswordReset";
 import "./login.css";
 
 const Login = () => {
@@ -60,6 +61,12 @@ const Login = () => {
           Dont have an account?
           <Link className="existslink" to="/">
             Signup
+          </Link>
+        </p>
+        <p className="reset">
+          Forgot password?
+          <Link className="reset-link" to="/resetpassword">
+            Reset Password
           </Link>
         </p>
       </div>
