@@ -149,14 +149,50 @@ const PremiumPurchase = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   }
+  const downloadExpense = async () => {
+    try {
+      // Make an API request to trigger the file download
+      const response = await axios.get(
+        "http://localhost:4000/api/expense/download",
+        {
+          headers: { Authorization: token },
+          responseType: "blob", // Set the response type to blob for downloading files
+        }
+      );
+
+      // Create a blob URL for the downloaded file
+      const blob = new Blob([response.data], {
+        type: "application/octet-stream",
+      });
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a link to trigger the download
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ExpenseFile.txt";
+      document.body.appendChild(a);
+      a.click();
+
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading expense:", error);
+      // Handle the error, e.g., show an error message to the user
+    }
+  };
   return (
     <div>
       {isPremium ? (
         <div>
           <h1 className="user">Premium user</h1>
-          <button onClick={fetchLeaderboardData} className="show-leaderboard">
-            {showLeaderboard ? "Hide Leaderboard" : "Show Leaderboard"}
-          </button>
+          <div className="buttons">
+            <button onClick={fetchLeaderboardData} className="show-leaderboard">
+              {showLeaderboard ? "Hide Leaderboard" : "Show Leaderboard"}
+            </button>
+            <button onClick={downloadExpense} className="show-leaderboard">
+              Download Expense
+            </button>
+          </div>
           {showLeaderboard && (
             <div className="leaderboard">
               <h2>Leaderboard</h2>
